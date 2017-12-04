@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Success page</title>
+    <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app_two/css/style.css' %}" media="screen" title="no title">
+  </head>
+
+  <body>
+    <div class = "wrapper">
+      <!-- <h1>This is success.html in app_two</h1> -->
+      <div class="Success">
+        <h1>Success! Welcome, {{ request.session.user_first_name }}!</h1>
+        <h4>Successfully registered (or logged in)!</h4>
+      </div>
+
+  <!-- logging a user out -->
+      <form action="{% url 'users:logout' %}" method='POST'>
+        {% csrf_token %}
+        <input type="submit" value="logout">
+      </form>
+    </div>
+  </body>
+</html>
