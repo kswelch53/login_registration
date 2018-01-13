@@ -28,6 +28,9 @@ class UserManager(models.Manager):
         # isalpha checks that string contains only letters:
         if not post_data['first_name'].isalpha():
             errors.append('First name must contains only letters')
+
+# Note: The problem with using isalpha to check names is that it doesn't allow spaces in first and last names (ie, Mary Ann Van Buren). Also some people have names with apostrophes (Conan O'Brien) and hyphens. Apparently you have to build your own function; I can't find one specifically for name validation.
+
 # last name
         if not post_data['last_name']:#python returns an empty string as false
             errors.append('Last name is required')
@@ -47,7 +50,11 @@ class UserManager(models.Manager):
             errors.append('Passwords must match')
 # date of birth; date object from datetime changed to string:
         if not post_data['dob'] < str(date.today()):
+            datestring = str(date.today())
+            print("Datestring is:", datestring)
             errors.append("Your date of birth cannot be in the future")
+        if not post_data['dob']:
+            errors.append("Please enter a date of birth")
 
 # check that submitted email is unique (non-duplicate) before other validations, because users log in with their emails
 # filter will return false if list is empty, true if not empty

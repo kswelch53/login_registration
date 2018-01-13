@@ -44,6 +44,8 @@ def register(request):
             # user can now be saved in session, by id:
             # index method in app_two will use this:
             request.session['user_id'] = response_from_models['user'].id
+            request.session['user_first_name'] = response_from_models['user'].first_name
+            print("App1 first_name:", request.session['user_first_name'])
 #redirects to index method in 2nd app via named route success from project-level urls.py
             return redirect('success:index')#named route/views.py method
 # 1st app handles only logging in / registering users
@@ -59,7 +61,7 @@ def register(request):
         return redirect('users:index')
 
 
-def logout (request):
+def logout(request):
     if request.method == 'POST':
         request.session.clear()#deletes everything in session
     return redirect('users:index')

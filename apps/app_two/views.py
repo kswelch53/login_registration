@@ -10,7 +10,7 @@ def index(request):
         return redirect('users:index')
     else:
         print("User id is:", request.session['user_id'])
-        print("User name is:", request.session['user_first_name'])
+        print("App2, User name is:", request.session['user_first_name'])
 
 # users who are logged in are directed to the success page:
     return render(request, 'app_two/success.html')
